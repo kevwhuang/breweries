@@ -1,4 +1,11 @@
-html {
+div {
+    margin: 1pc;
+}
+
+#breweries {
+    font-size: 1pc;
+}
+
+#gps {
     font-size: 2pc;
-    margin: 0.5pc;
 }
