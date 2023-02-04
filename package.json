@@ -1,0 +1,22 @@
+{
+  "name": "brewery",
+  "version": "0.0.1",
+  "description": "",
+  "author": "Kevin Huang",
+  "license": "MIT",
+  "main": "app.js",
+  "scripts": {
+    "watch": "node_modules/nodemon/bin/nodemon.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevwhuang/brewery.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kevwhuang/brewery/issues"
+  },
+  "homepage": "https://github.com/kevwhuang/brewery#readme",
+  "devDependencies": {
+    "dotenv": "*"
+  }
+}

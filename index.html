@@ -1,36 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en-US" dir="ltr">
 
 <head>
+
+    <title>Brewery Search</title>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Kevin Huang">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <link rel="icon" type="image/x-icon" href="https://www.openbrewerydb.org/favicon.png">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="main.css">
+
+    <script src="main.js" defer></script>
+
 </head>
 
 <body>
-    <div id="gps"></div>
 
-    <script>
-        const g = navigator.geolocation;
-        const gps = document.getElementById('gps');
-        onload = getPos();
+    <header>
+    </header>
 
-        function getPos() {
-            if (g) g.watchPosition(writePos, errorPos); // getCurrentPosition()
-            else gps.innerHTML = 'Your browser does not support geolocation.';
-        }
+    <main>
 
-        function writePos(pos) {
-            gps.innerHTML += 'Latitude: ' + pos.coords.latitude + '<br>';
-            gps.innerHTML += 'Longitude: ' + pos.coords.longitude + '<br>';
-            gps.innerHTML += 'Accuracy: ' + pos.coords.accuracy + '<br>';
-        }
+        <div id="gps"></div>
 
-        function errorPos(err) {
-            gps.innerHTML += 'Error...';
-        }
-    </script>
+    </main>
+
 </body>
 
 </html>
