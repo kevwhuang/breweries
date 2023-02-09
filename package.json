@@ -1,10 +1,10 @@
 {
-  "name": "brewery",
-  "version": "0.0.1",
-  "description": "",
+  "name": "breweries",
+  "version": "1.0.0",
+  "description": "A simple demo using fetch and geolocation.",
   "author": "Kevin Huang",
   "license": "MIT",
-  "main": "app.js",
+  "main": "js/main.js",
   "scripts": {
     "watch": "node_modules/nodemon/bin/nodemon.js"
   },
