@@ -50,6 +50,7 @@ header {
     text-align: center;
     top: 0;
     width: 100%;
+    z-index: 1;
 }
 
 header div,
@@ -68,11 +69,25 @@ header #theme {
     opacity: 1;
 }
 
+header #hamburger {
+    margin: 0.25pc 0 0 0;
+}
+
+header #hamburger button,
+header #hamburger select {
+    border: 1px solid black;
+    border-radius: 0;
+    margin: 0;
+    padding: 0.25pc 0;
+    width: 100%;
+}
+
 /* -------------------------------------------------------------------------- *\
     Main
 \* -------------------------------------------------------------------------- */
 
 main #gps {
+    color: #3f87ea;
     margin: 0 2pc;
     margin-top: 7.5pc;
     padding: 2pc;
@@ -111,13 +126,6 @@ main .card .type {
     text-transform: uppercase;
 }
 
-main .card .material-symbols-outlined {
-    cursor: pointer;
-    font-size: var(--s3);
-    font-variation-settings: 'FILL' 0, 'wght' 500;
-    vertical-align: middle;
-}
-
 main .card .hearted {
     font-variation-settings: 'FILL' 1;
 }
@@ -144,6 +152,26 @@ footer {
     position: fixed;
     text-align: center;
     width: 100%;
+}
+
+/* -------------------------------------------------------------------------- *\
+    Classes
+\* -------------------------------------------------------------------------- */
+
+.material-symbols-outlined {
+    cursor: pointer;
+    font-size: var(--s3);
+    font-variation-settings: 'FILL' 0, 'wght' 500;
+    vertical-align: middle;
+}
+
+.menu-off {
+    position: absolute;
+    top: -4.5pc;
+}
+
+.menu-on {
+    margin-top: 12.5pc;
 }
 
 /* -------------------------------------------------------------------------- *\
@@ -175,6 +203,16 @@ button:active {
 
 select:focus {
     outline: none;
+}
+
+.dropdown:hover {
+    color: var(--c1);
+    transition: all 0.5s;
+}
+
+.dropdown:active {
+    color: var(--c3);
+    transition: none;
 }
 
 .hearted:active {
@@ -250,9 +288,22 @@ select:focus {
         display: none;
     }
 
-    main .card {
+    .material-symbols-outlined {
+        font-size: var(--s2);
+    }
+
+    main #gps {
         padding: 1pc 0;
+    }
+
+    main #loading {
+        font-size: var(--s2);
+    }
+
+    main .card {
         margin: 0 0.25pc;
+        padding: 1pc 0;
+        width: calc(100vw - 0.5pc);
     }
 
     main .card .name {
@@ -261,10 +312,6 @@ select:focus {
     }
 
     main .card .type {
-        font-size: var(--s2);
-    }
-
-    main .card .material-symbols-outlined {
         font-size: var(--s2);
     }
 

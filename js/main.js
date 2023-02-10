@@ -1,22 +1,28 @@
+'use strict';
+
 /* -------------------------------------------------------------------------- *\
     Variable Declarations
 \* -------------------------------------------------------------------------- */
 
-const favorites = document.getElementById('favorites');
-const filter = document.getElementById('filter');
-const search = document.getElementById('search');
-const sortDistance = document.getElementById('sortDistance');
-const sortName = document.getElementById('sortName');
-const theme = document.getElementById('theme');
+let favorites = document.getElementById('favorites');
+let filter = document.getElementById('filter');
+let hamburger = document.getElementById('hamburger');
+let menu = document.getElementById('menu');
+let search = document.getElementById('search');
+let sortDistance = document.getElementById('sortDistance');
+let sortName = document.getElementById('sortName');
+let theme = document.getElementById('theme');
 
 let firstRender = true;
-let hearts = [];
 let heartsDisplay = false;
+let searchState = true;
+let sortDistanceOrder = true;
+let sortNameOrder = false;
+
+let hearts = [];
 let lat;
 let lon;
 let master = [];
-let sortDistanceOrder = true;
-let sortNameOrder = false;
 let temp = [];
 let themeType = 0;
 
@@ -53,19 +59,22 @@ async function geolocation(num = 50) {
 
         if (g) g.getCurrentPosition(pos => {
             gps.innerHTML = `${pos.coords.latitude} / ${pos.coords.longitude}`;
-            console.log(gps.innerHTML);
+            console.info(gps.innerHTML);
         });
-        else gps.innerHTML = 'Your browser does not support geolocation.';
+        else gps.innerHTML = 'Your browser does not support geolocation...';
 
         if (g) g.watchPosition(writePos, errorPos);
-        else gps.innerHTML = 'Your browser does not support geolocation.';
+        else gps.innerHTML = 'Your browser does not support geolocation...';
     });
 
     await fetch(`https://api.openbrewerydb.org/breweries?by_dist=${lat},${lon}&per_page=${num}`)
         .then(res => res.json())
         .then(data => { master = data; })
         .then(() => render())
-        .catch(err => console.log(err));
+        .catch(err => {
+            gps.innerHTML = 'Error... do not resize the window during fetch...';
+            console.info(err);
+        });
 
     heartSystem();
     toggleButtons();
@@ -81,10 +90,10 @@ function render() {
     breweries.innerHTML = null;
 
     if (firstRender) {
+        firstRender = false;
+
         addDistance();
         cleanup();
-
-        firstRender = false;
     }
 
     master.forEach(e => {
@@ -122,6 +131,8 @@ function render() {
 
 function heartSystem() {
     for (const e of document.getElementsByTagName('i')) {
+        if (e.id) continue;
+
         const name = e.parentElement.previousElementSibling.textContent;
 
         e.addEventListener('click', () => {
@@ -203,7 +214,7 @@ function cleanup() {
         else e.website = e.website_url
             .slice(e.website_url.indexOf('//') + 2)
             .replace('/', '');
-        if (!e.website.startsWith('www')) e.website = `www.${e.website}`;
+        if (!e.website.startsWith('www') && e.website) e.website = `www.${e.website}`;
 
         delete e.address_2;
         delete e.address_3;
@@ -232,7 +243,16 @@ function toggleButtons() {
     Event Listeners
 \* -------------------------------------------------------------------------- */
 
-favorites.addEventListener('click', () => {
+function addListeners() {
+    favorites.addEventListener('click', favoritesEL);
+    filter.addEventListener('change', filterEL);
+    search.addEventListener('click', searchEL);
+    sortDistance.addEventListener('click', sortDistanceEL);
+    sortName.addEventListener('click', sortNameEL);
+    theme.addEventListener('click', themeEL);
+}
+
+function favoritesEL() {
     if (!heartsDisplay) {
         heartsDisplay = true;
         favorites.style.background = '#3f87ea';
@@ -251,9 +271,9 @@ favorites.addEventListener('click', () => {
 
     render();
     heartSystem();
-});
+}
 
-filter.addEventListener('change', v => {
+function filterEL(v) {
     const { value } = v.target;
 
     if (value !== 'all') filter.style.background = '#3f87ea';
@@ -268,18 +288,19 @@ filter.addEventListener('change', v => {
 
     render();
     heartSystem();
-});
+}
 
-search.addEventListener('click', e => {
+function searchEL(e) {
+    searchState = false;
     e.target.disabled = true;
     e.target.style.animationPlayState = 'paused';
     e.target.style.cursor = 'not-allowed';
     e.target.style.opacity = 0.25;
 
     geolocation();
-});
+}
 
-sortDistance.addEventListener('click', () => {
+function sortDistanceEL() {
     if (heartsDisplay) master = [...hearts];
 
     if (!sortDistanceOrder) {
@@ -292,9 +313,9 @@ sortDistance.addEventListener('click', () => {
 
     render();
     heartSystem();
-});
+}
 
-sortName.addEventListener('click', () => {
+function sortNameEL() {
     if (heartsDisplay) master = [...hearts];
 
     if (!sortNameOrder) {
@@ -307,9 +328,9 @@ sortName.addEventListener('click', () => {
 
     render();
     heartSystem();
-});
+}
 
-theme.addEventListener('click', () => {
+function themeEL() {
     if (!themeType) {
         themeType = 1;
         document.body.style.background = '#eee';
@@ -327,4 +348,104 @@ theme.addEventListener('click', () => {
 
         changeTextColor('white');
     }
-});
+}
+
+/* -------------------------------------------------------------------------- *\
+    Responsive Design
+\* -------------------------------------------------------------------------- */
+
+window.matchMedia('(max-width:480px)').onchange = mediaQuery;
+window.onload = responsive;
+
+function mediaQuery() {
+    if (heartsDisplay) favorites.click();
+
+    master.forEach(e => { e.hidden = false; });
+
+    render();
+    responsive();
+}
+
+function responsive() {
+    const main = document.querySelector('main');
+
+    if (window.innerWidth > 480) {
+        document.querySelector('header').innerHTML = ''
+            + '<nav>'
+            + '<button id="search" tabindex="0">Search!</button>\n'
+            + '<button id="theme">Theme</button>\n'
+            + '<button id="favorites" disabled>Favorites</button>'
+            + '</nav>'
+            + '<div id="options">'
+            + '<button id="sortName" disabled>Sort Name</button>\n'
+            + '<button id="sortDistance" disabled>Sort Distance</button>\n'
+            + '<select id="filter" size="1" disabled>'
+            + '<option value="all" selected>All</option>'
+            + '<option value="brewpub">Brewpubs</option>'
+            + '<option value="contract">Contract</option>'
+            + '<option value="micro">Micro</option>'
+            + '<option value="regional">Regional</option>'
+            + '</select>'
+            + '</div>';
+
+        main.className = '';
+    } else {
+        document.querySelector('header').innerHTML = ''
+            + '<i id="menu" class="material-symbols-outlined dropdown">menu_open</i>'
+            + '<div id="hamburger" role="navigation">'
+            + '<button id="search" tabindex="0">Search!</button>'
+            + '<button id="theme">Theme</button>'
+            + '<button id="favorites" disabled>Favorites</button>'
+            + '<button id="sortName" disabled>Sort Name</button>'
+            + '<button id="sortDistance" disabled>Sort Distance</button>'
+            + '<select id="filter" size="1" disabled>'
+            + '<option value="all" selected>All</option>'
+            + '<option value="brewpub">Brewpubs</option>'
+            + '<option value="contract">Contract</option>'
+            + '<option value="micro">Micro</option>'
+            + '<option value="regional">Regional</option>'
+            + '</select>'
+            + '</div>';
+
+        hamburger = document.getElementById('hamburger');
+        menu = document.getElementById('menu');
+
+        menu.addEventListener('click', () => {
+            if (menu.innerText === 'menu') {
+                hamburger.style.display = 'block';
+                main.className = 'menu-on';
+                menu.innerText = 'menu_open';
+            } else {
+                hamburger.style.display = 'none';
+                main.className = 'menu-off';
+                menu.innerText = 'menu';
+            }
+        });
+
+        main.className = 'menu-on';
+
+        if (search.disabled) {
+            hamburger.style.display = 'none';
+            main.className = 'menu-off';
+            menu.innerText = 'menu';
+        }
+    }
+
+    favorites = document.getElementById('favorites');
+    filter = document.getElementById('filter');
+    search = document.getElementById('search');
+    sortDistance = document.getElementById('sortDistance');
+    sortName = document.getElementById('sortName');
+    theme = document.getElementById('theme');
+
+    addListeners();
+
+    if (!searchState) {
+        search.disabled = true;
+        search.style.animationPlayState = 'paused';
+        search.style.cursor = 'not-allowed';
+        search.style.opacity = 0.25;
+
+        if (!firstRender) toggleButtons();
+    }
+}

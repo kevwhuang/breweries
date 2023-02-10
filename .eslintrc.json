@@ -1,0 +1,28 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": "airbnb-base",
+    "overrides": [],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "plugins": [],
+    "rules": {
+        "arrow-parens": "off",
+        "curly": "off",
+        "indent": "off",
+        "no-confusing-arrow": "off",
+        "no-console": "off",
+        "no-continue": "off",
+        "no-loop-func": "off",
+        "no-plusplus": "off",
+        "no-restricted-syntax": "off",
+        "no-unused-vars": "warn",
+        "no-use-before-define": "off",
+        "strict": "off"
+    }
+}

@@ -1,22 +1,24 @@
 {
   "name": "breweries",
   "version": "1.0.0",
-  "description": "A simple demo using fetch and geolocation.",
+  "description": "Discover local breweries.",
   "author": "Kevin Huang",
   "license": "MIT",
   "main": "js/main.js",
   "scripts": {
-    "watch": "node_modules/nodemon/bin/nodemon.js"
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kevwhuang/brewery.git"
+    "url": "https://github.com/kevwhuang/breweries.git"
   },
   "bugs": {
-    "url": "https://github.com/kevwhuang/brewery/issues"
+    "url": "https://github.com/kevwhuang/breweries/issues"
   },
-  "homepage": "https://github.com/kevwhuang/brewery#readme",
+  "homepage": "https://github.com/kevwhuang/breweries#readme",
   "devDependencies": {
-    "dotenv": "*"
+    "dotenv": "*",
+    "eslint-config-airbnb": "*",
+    "eslint-config-airbnb-base": "*"
   }
 }

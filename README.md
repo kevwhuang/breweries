@@ -1,3 +1,3 @@
-[Live Site](kevwhuang.github.io/breweries)
+[Live Site](https://kevwhuang.github.io/breweries)
 
-Location services must be __enabled__.
+Location services must be enabled.
