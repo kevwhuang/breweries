@@ -1,4 +1,5 @@
 'use strict';
+// Hopped into this repo as i saw you followed, awesome page but see javascript used widely to manipulate the style of the site and write DOM elements, and other "imperative" approaches that increase the mental overhead for maintenance and later feature development - happy to add my ideas in a separate PR while sticking to vanilla JS if interested - piccirilloj1@gmail.com / 636-346-0118
 
 /* -------------------------------------------------------------------------- *\
     Variable Declarations
