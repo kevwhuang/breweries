@@ -237,6 +237,8 @@ function toggleButtons() {
         e.style.cursor = 'pointer';
         e.style.opacity = 1;
     });
+
+    filter.style.cursor = 'ns-resize';
 }
 
 /* -------------------------------------------------------------------------- *\
@@ -380,7 +382,7 @@ function responsive() {
             + '<button id="sortName" disabled>Sort Name</button>\n'
             + '<button id="sortDistance" disabled>Sort Distance</button>\n'
             + '<select id="filter" size="1" disabled>'
-            + '<option value="all" selected>All &#x2b07</option>'
+            + '<option value="all" selected>All</option>'
             + '<option value="brewpub">Brewpubs</option>'
             + '<option value="contract">Contract</option>'
             + '<option value="micro">Micro</option>'
@@ -399,7 +401,7 @@ function responsive() {
             + '<button id="sortName" disabled>Sort Name</button>'
             + '<button id="sortDistance" disabled>Sort Distance</button>'
             + '<select id="filter" size="1" disabled>'
-            + '<option value="all" selected>All &#x2b07</option>'
+            + '<option value="all" selected>All</option>'
             + '<option value="brewpub">Brewpubs</option>'
             + '<option value="contract">Contract</option>'
             + '<option value="micro">Micro</option>'
