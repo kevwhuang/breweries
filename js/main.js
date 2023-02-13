@@ -238,6 +238,8 @@ function toggleButtons() {
         e.style.cursor = 'pointer';
         e.style.opacity = 1;
     });
+
+    filter.style.cursor = 'ns-resize';
 }
 
 /* -------------------------------------------------------------------------- *\
