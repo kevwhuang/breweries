@@ -1,13 +1,13 @@
 :root {
-    /* Colors - Mastercard (Palette Maker) */
-    --c1: #d9302c;
-    --c2: #ff5f00;
-    --c3: #eaa23f;
-    /* Sizes - 1.618 Golden Ratio (Type Scale) */
-    --s1: 9.89px;
-    --s2: 16.00px;
-    --s3: 25.89px;
-    --s4: 41.89px;
-    --s5: 67.77px;
-    --s6: 109.66px;
+  /* Colors - Mastercard (Palette Maker) */
+  --c1: #d9302c;
+  --c2: #ff5f00;
+  --c3: #eaa23f;
+  /* Sizes - 1.618 Golden Ratio (Type Scale) */
+  --s1: 9.89px;
+  --s2: 16px;
+  --s3: 25.89px;
+  --s4: 41.89px;
+  --s5: 67.77px;
+  --s6: 109.66px;
 }

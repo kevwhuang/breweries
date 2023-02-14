@@ -5,14 +5,14 @@
 @import url(https://fonts.googleapis.com/css?family=Cousine);
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    background-color: #222;
-    color: white;
-    font-family: Cousine, 'Courier New', monospace;
-    font-size: var(--s2);
+  background-color: #222;
+  color: white;
+  font-family: Cousine, "Courier New", monospace;
+  font-size: var(--s2);
 }
 
 /* -------------------------------------------------------------------------- *\
@@ -20,27 +20,27 @@ body {
 \* -------------------------------------------------------------------------- */
 
 a {
-    color: white;
+  color: white;
 }
 
 button,
 select {
-    -moz-appearance: none;
-    -moz-text-align-last: center;
-    -webkit-appearance: none;
-    appearance: none;
-    background: var(--c3);
-    border: none;
-    border-radius: 0.5rem;
-    color: white;
-    cursor: not-allowed;
-    font-size: var(--s3);
-    margin: 0 1.5pc;
-    opacity: 0.25;
-    padding: 0.5pc;
-    text-align: center;
-    text-align-last: center;
-    width: 25vw;
+  -moz-appearance: none;
+  -moz-text-align-last: center;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--c3);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  cursor: not-allowed;
+  font-size: var(--s3);
+  margin: 0 1.5pc;
+  opacity: 0.25;
+  padding: 0.5pc;
+  text-align: center;
+  text-align-last: center;
+  width: 25vw;
 }
 
 /* -------------------------------------------------------------------------- *\
@@ -48,44 +48,44 @@ select {
 \* -------------------------------------------------------------------------- */
 
 header {
-    background: #152238;
-    color: white;
-    font-size: var(--s2);
-    position: fixed;
-    text-align: center;
-    top: 0;
-    width: 100%;
-    z-index: 1;
+  background: #152238;
+  color: white;
+  font-size: var(--s2);
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 header div,
 header nav {
-    margin: 0.5pc 0;
+  margin: 0.5pc 0;
 }
 
 header #search {
-    -webkit-animation: 0.5s ease-in-out alternate infinite elongate;
-    animation: 0.5s ease-in-out alternate infinite elongate;
-    cursor: pointer;
-    opacity: 1;
+  -webkit-animation: 0.5s ease-in-out alternate infinite elongate;
+  animation: 0.5s ease-in-out alternate infinite elongate;
+  cursor: pointer;
+  opacity: 1;
 }
 
 header #theme {
-    cursor: pointer;
-    opacity: 1;
+  cursor: pointer;
+  opacity: 1;
 }
 
 header #hamburger {
-    margin: 0.25pc 0 0 0;
+  margin: 0.25pc 0 0 0;
 }
 
 header #hamburger button,
 header #hamburger select {
-    border: 1px solid black;
-    border-radius: 0;
-    margin: 0;
-    padding: 0.25pc 0;
-    width: 100%;
+  border: 1px solid black;
+  border-radius: 0;
+  margin: 0;
+  padding: 0.25pc 0;
+  width: 100%;
 }
 
 /* -------------------------------------------------------------------------- *\
@@ -93,57 +93,57 @@ header #hamburger select {
 \* -------------------------------------------------------------------------- */
 
 main #gps {
-    color: #3f87ea;
-    margin: 0 2pc;
-    margin-top: 7.5pc;
-    padding: 2pc;
+  color: #3f87ea;
+  margin: 0 2pc;
+  margin-top: 7.5pc;
+  padding: 2pc;
 }
 
 main #loading {
-    -webkit-animation: 0.5s ease-in-out alternate infinite blink;
-    animation: 0.5s ease-in-out alternate infinite blink;
-    font-size: var(--s3);
-    opacity: 0;
-    text-align: center;
+  -webkit-animation: 0.5s ease-in-out alternate infinite blink;
+  animation: 0.5s ease-in-out alternate infinite blink;
+  font-size: var(--s3);
+  opacity: 0;
+  text-align: center;
 }
 
 main .card {
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-    margin: 0 2pc;
-    padding: 2pc;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  margin: 0 2pc;
+  padding: 2pc;
 }
 
 main .card .distance {
-    font-size: var(--s2);
-    font-style: italic;
-    margin-bottom: 0.5pc;
+  font-size: var(--s2);
+  font-style: italic;
+  margin-bottom: 0.5pc;
 }
 
 main .card .name {
-    color: var(--c2);
-    font-size: var(--s4);
-    line-height: var(--s4);
+  color: var(--c2);
+  font-size: var(--s4);
+  line-height: var(--s4);
 }
 
 main .card .type {
-    color: var(--c1);
-    font-size: var(--s3);
-    margin-bottom: 0.5pc;
-    text-transform: uppercase;
+  color: var(--c1);
+  font-size: var(--s3);
+  margin-bottom: 0.5pc;
+  text-transform: uppercase;
 }
 
 main .card .hearted {
-    font-variation-settings: 'FILL' 1;
+  font-variation-settings: "FILL" 1;
 }
 
 main .card:first-child {
-    border-top: 2px solid black;
+  border-top: 2px solid black;
 }
 
 main .card:last-child {
-    border-bottom: 0;
-    margin-bottom: 2pc;
+  border-bottom: 0;
+  margin-bottom: 2pc;
 }
 
 /* -------------------------------------------------------------------------- *\
@@ -151,14 +151,14 @@ main .card:last-child {
 \* -------------------------------------------------------------------------- */
 
 footer {
-    background: #152238;
-    bottom: 0;
-    color: white;
-    font-size: var(--s2);
-    padding: 0.5pc;
-    position: fixed;
-    text-align: center;
-    width: 100%;
+  background: #152238;
+  bottom: 0;
+  color: white;
+  font-size: var(--s2);
+  padding: 0.5pc;
+  position: fixed;
+  text-align: center;
+  width: 100%;
 }
 
 /* -------------------------------------------------------------------------- *\
@@ -166,19 +166,19 @@ footer {
 \* -------------------------------------------------------------------------- */
 
 .material-symbols-outlined {
-    cursor: pointer;
-    font-size: var(--s3);
-    font-variation-settings: 'FILL' 0, 'wght' 500;
-    vertical-align: middle;
+  cursor: pointer;
+  font-size: var(--s3);
+  font-variation-settings: "FILL" 0, "wght" 500;
+  vertical-align: middle;
 }
 
 .menu-off {
-    position: absolute;
-    top: -4.5pc;
+  position: absolute;
+  top: -4.5pc;
 }
 
 .menu-on {
-    margin-top: 12.5pc;
+  margin-top: 12.5pc;
 }
 
 /* -------------------------------------------------------------------------- *\
@@ -186,54 +186,54 @@ footer {
 \* -------------------------------------------------------------------------- */
 
 a:visited {
-    color: white;
+  color: white;
 }
 
 a:hover {
-    color: var(--c3);
-    text-decoration: underline;
+  color: var(--c3);
+  text-decoration: underline;
 }
 
 a:active {
-    color: var(--c2);
+  color: var(--c2);
 }
 
 button:hover,
 select:hover {
-    -webkit-transition: color 0.5s;
-    -o-transition: color 0.5s;
-    color: var(--c1);
-    transition: color 0.5s;
+  -webkit-transition: color 0.5s;
+  -o-transition: color 0.5s;
+  color: var(--c1);
+  transition: color 0.5s;
 }
 
 button:active {
-    opacity: 0.75 !important;
+  opacity: 0.75 !important;
 }
 
 select:focus {
-    outline: none;
+  outline: none;
 }
 
 .dropdown:hover {
-    -webkit-transition: all 0.5s;
-    -o-transition: all 0.5s;
-    color: var(--c1);
-    transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  color: var(--c1);
+  transition: all 0.5s;
 }
 
 .dropdown:active {
-    -webkit-transition: none;
-    -o-transition: none;
-    color: var(--c3);
-    transition: none;
+  -webkit-transition: none;
+  -o-transition: none;
+  color: var(--c3);
+  transition: none;
 }
 
 .hearted:active {
-    font-variation-settings: 'FILL' 0 !important;
+  font-variation-settings: "FILL" 0 !important;
 }
 
 .unhearted:active {
-    font-variation-settings: 'FILL' 1 !important;
+  font-variation-settings: "FILL" 1 !important;
 }
 
 /* -------------------------------------------------------------------------- *\
@@ -241,107 +241,95 @@ select:focus {
 \* -------------------------------------------------------------------------- */
 
 @-webkit-keyframes blink {
-
-    100% {
-        opacity: 1;
-    }
-
+  100% {
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes elongate {
-
-    100% {
-        letter-spacing: 0.2rem;
-    }
-
+  100% {
+    letter-spacing: 0.2rem;
+  }
 }
 
 @keyframes blink {
-
-    100% {
-        opacity: 1;
-    }
-
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes elongate {
-
-    100% {
-        letter-spacing: 0.2rem;
-    }
-
+  100% {
+    letter-spacing: 0.2rem;
+  }
 }
 
 /* -------------------------------------------------------------------------- *\
     Media Queries
 \* -------------------------------------------------------------------------- */
 
-@media screen and (max-width:960px) {
+@media screen and (max-width: 960px) {
+  button,
+  select {
+    font-size: var(--s2);
+    margin: 0;
+    width: 30vw;
+  }
 
-    button,
-    select {
-        font-size: var(--s2);
-        margin: 0;
-        width: 30vw;
-    }
+  span {
+    display: none;
+  }
 
-    span {
-        display: none;
-    }
+  main #gps {
+    margin-top: 6pc;
+    padding: 1pc;
+    text-align: center;
+  }
 
-    main #gps {
-        margin-top: 6pc;
-        padding: 1pc;
-        text-align: center;
-    }
+  main .card {
+    margin: 0 1pc;
+    padding: 1pc;
+    text-align: center;
+  }
 
-    main .card {
-        margin: 0 1pc;
-        padding: 1pc;
-        text-align: center;
-    }
-
-    main .card .name {
-        font-size: calc(var(--s4) - 0.5pc);
-    }
-
+  main .card .name {
+    font-size: calc(var(--s4) - 0.5pc);
+  }
 }
 
-@media screen and (max-width:480px) {
+@media screen and (max-width: 480px) {
+  body {
+    overflow-x: hidden;
+  }
 
-    body {
-        overflow-x: hidden;
-    }
+  output {
+    display: none;
+  }
 
-    output {
-        display: none;
-    }
+  .material-symbols-outlined {
+    font-size: var(--s2);
+  }
 
-    .material-symbols-outlined {
-        font-size: var(--s2);
-    }
+  main #gps {
+    padding: 1pc 0;
+  }
 
-    main #gps {
-        padding: 1pc 0;
-    }
+  main #loading {
+    font-size: var(--s2);
+  }
 
-    main #loading {
-        font-size: var(--s2);
-    }
+  main .card {
+    margin: 0 0.25pc;
+    padding: 1pc 0;
+    width: calc(100vw - 0.5pc);
+  }
 
-    main .card {
-        margin: 0 0.25pc;
-        padding: 1pc 0;
-        width: calc(100vw - 0.5pc);
-    }
+  main .card .name {
+    font-size: var(--s2);
+    line-height: normal;
+  }
 
-    main .card .name {
-        font-size: var(--s2);
-        line-height: normal;
-    }
-
-    main .card .type {
-        font-size: var(--s2);
-    }
-
+  main .card .type {
+    font-size: var(--s2);
+  }
 }
