@@ -51,15 +51,13 @@ header {
   background: #152238;
   color: white;
   font-size: var(--s2);
-  position: fixed;
   text-align: center;
-  top: 0;
   width: 100%;
   z-index: 1;
 }
 
-header div,
-header nav {
+header #menu,
+header .above-480 > * {
   margin: 0.5pc 0;
 }
 
@@ -95,7 +93,6 @@ header #hamburger select {
 main #gps {
   color: #3f87ea;
   margin: 0 2pc;
-  margin-top: 7.5pc;
   padding: 2pc;
 }
 
@@ -170,15 +167,6 @@ footer {
   font-size: var(--s3);
   font-variation-settings: "FILL" 0, "wght" 500;
   vertical-align: middle;
-}
-
-.menu-off {
-  position: absolute;
-  top: -4.5pc;
-}
-
-.menu-on {
-  margin-top: 12.5pc;
 }
 
 /* -------------------------------------------------------------------------- *\
@@ -277,7 +265,6 @@ select:focus {
   }
 
   main #gps {
-    margin-top: 6pc;
     padding: 1pc;
     text-align: center;
   }

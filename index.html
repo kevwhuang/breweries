@@ -16,6 +16,7 @@
 
     <link rel="icon" type="image/x-icon" href="https://www.openbrewerydb.org/favicon.png">
     <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/dropdown.css">
     <link rel="stylesheet" href="css/utils.css">
     <link rel="stylesheet" href="css/root.css">
     <link rel="stylesheet" href="css/main.css">
@@ -25,37 +26,48 @@
     <script src="js/main.js" defer></script>
     <script src="js/utils.js" defer></script>
     <script src="js/geolocation.js" defer></script>
+    <script src="js/dropdown.js" defer></script>
 
 </head>
 
 <body>
 
     <header>
-
-        <nav>
-
-            <button id="search" tabindex="0">Search!</button>
-            <button id="theme">Theme</button>
-            <button id="favorites" disabled>Favorites</button>
-
-        </nav>
-
-        <div id="options">
-
-            <button id="sortName" disabled>Sort Name</button>
-            <button id="sortDistance" disabled>Sort Distance</button>
-            <select id="filter" size="1" disabled>
-                <option value="all" selected>All</option>
-                <option value="brewpub">Brewpubs</option>
-                <option value="contract">Contract</option>
-                <option value="micro">Micro</option>
-                <option value="regional">Regional</option>
-            </select>
-
+        <div class="above-480">
+            <nav>
+                <button id="search" tabindex="0" onclick="searchEL(this)">Search!</button>
+                <button id="theme" onclick="themeEL()">Theme</button>
+                <button id="favorites" disabled onclick="favoritesEL()">Favorites</button>
+            </nav>
+            <div id="options">
+                <button id="sortName" disabled onclick="sortNameEL()">Sort Name</button>
+                <button id="sortDistance" disabled onclick="sortDistanceEL()">Sort Distance</button>
+                <select id="filter" size="1" disabled onchange="filterEL()">
+                    <option value="all" selected>All</option>
+                    <option value="brewpub">Brewpubs</option>
+                    <option value="contract">Contract</option>
+                    <option value="micro">Micro</option>
+                    <option value="regional">Regional</option>
+                </select>
+            </div>
         </div>
-
-        <i id="menu" class="material-symbols-outlined" hidden>menu</i>
-        <div id="hamburger" role="navigation"></div>
+        <div class="sub-480">
+            <i id="menu" class="material-symbols-outlined menu-off dropdown" onclick="toggleDropdown()">menu</i>
+            <div id="hamburger" role="navigation">
+                <button id="search" tabindex=0 onclick="searchEL(this)">Search!</button>
+                <button id="theme" onclick="themeEL(this)">Theme</button>
+                <button id="favorites" disabled onclick="favoritesEL(this)">Favorites</button>
+                <button id="sortName" disabled onclick="sortNameEL(this)">Sort Name</button>
+                <button id="sortDistance" disabled onclick="sortDistanceEL(this)">Sort Distance</button>
+                <select id="filter" size=1 disabled onchange="filterEL(this)">
+                    <option value="all" selected>All</option>
+                    <option value="brewpub">Brewpubs</option>
+                    <option value="contract">Contract</option>
+                    <option value="micro">Micro</option>
+                    <option value="regional">Regional</option>
+                </select>
+            </div>
+        </div>
 
     </header>
 

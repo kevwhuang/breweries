@@ -1,0 +1,23 @@
+.sub-480 {
+  display: none;
+}
+
+.above-480 {
+  display: block;
+}
+
+@media screen and (max-width: 480px) {
+  .sub-480 {
+    display: block;
+  }
+  .above-480 {
+    display: none;
+  }
+  /* Select sibling based on previous sibling.  Here, if id=menu contains class .menu-on, then rules get applied to id=hamburger*/
+  #menu.menu-on ~ #hamburger {
+    display: block;
+  }
+  #menu.menu-off ~ #hamburger {
+    display: none;
+  }
+}

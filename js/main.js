@@ -247,19 +247,6 @@ function toggleButtons() {
   filter.style.cursor = "ns-resize";
 }
 
-/* -------------------------------------------------------------------------- *\
-    Event Listeners
-\* -------------------------------------------------------------------------- */
-
-function addListeners() {
-  favorites.addEventListener("click", favoritesEL);
-  filter.addEventListener("change", filterEL);
-  search.addEventListener("click", searchEL);
-  sortDistance.addEventListener("click", sortDistanceEL);
-  sortName.addEventListener("click", sortNameEL);
-  theme.addEventListener("click", themeEL);
-}
-
 function favoritesEL() {
   if (!heartsDisplay) {
     heartsDisplay = true;
@@ -277,6 +264,7 @@ function favoritesEL() {
     hearts = hearts.flat();
   }
 
+  toggleDropdown();
   render();
   heartSystem();
 }
@@ -294,16 +282,17 @@ function filterEL(v) {
     } else e.hidden = false;
   });
 
+  toggleDropdown();
   render();
   heartSystem();
 }
 
 function searchEL(e) {
   searchState = false;
-  e.target.disabled = true;
-  e.target.style.animationPlayState = "paused";
-  e.target.style.cursor = "not-allowed";
-  e.target.style.opacity = 0.25;
+  e.disabled = true;
+  e.style.animationPlayState = "paused";
+  e.style.cursor = "not-allowed";
+  e.style.opacity = 0.25;
 
   toggleDropdown();
   manageGeolocation().then((result) => {
@@ -325,6 +314,7 @@ function sortDistanceEL() {
     master.sort((a, b) => (a.distance > b.distance ? -1 : 1));
   }
 
+  toggleDropdown();
   render();
   heartSystem();
 }
@@ -344,6 +334,7 @@ function sortNameEL() {
     );
   }
 
+  toggleDropdown();
   render();
   heartSystem();
 }
@@ -366,6 +357,7 @@ function themeEL() {
 
     changeTextColor("white");
   }
+  toggleDropdown();
 }
 
 /* -------------------------------------------------------------------------- *\
@@ -373,7 +365,6 @@ function themeEL() {
 \* -------------------------------------------------------------------------- */
 
 window.matchMedia("(max-width:480px)").onchange = mediaQuery;
-window.onload = responsive;
 
 function mediaQuery() {
   if (heartsDisplay) favorites.click();
@@ -383,91 +374,4 @@ function mediaQuery() {
   });
 
   render();
-  responsive();
-}
-
-function responsive() {
-  const main = document.querySelector("main");
-
-  if (window.innerWidth > 480) {
-    document.querySelector("header").innerHTML =
-      "" +
-      "<nav>" +
-      '<button id="search" tabindex="0">Search!</button>\n' +
-      '<button id="theme">Theme</button>\n' +
-      '<button id="favorites" disabled>Favorites</button>' +
-      "</nav>" +
-      '<div id="options">' +
-      '<button id="sortName" disabled>Sort Name</button>\n' +
-      '<button id="sortDistance" disabled>Sort Distance</button>\n' +
-      '<select id="filter" size="1" disabled>' +
-      '<option value="all" selected>All</option>' +
-      '<option value="brewpub">Brewpubs</option>' +
-      '<option value="contract">Contract</option>' +
-      '<option value="micro">Micro</option>' +
-      '<option value="regional">Regional</option>' +
-      "</select>" +
-      "</div>";
-
-    main.className = "";
-  } else {
-    document.querySelector("header").innerHTML =
-      "" +
-      '<i id="menu" class="material-symbols-outlined dropdown">menu_open</i>' +
-      '<div id="hamburger" role="navigation">' +
-      '<button id="search" tabindex="0">Search!</button>' +
-      '<button id="theme">Theme</button>' +
-      '<button id="favorites" disabled>Favorites</button>' +
-      '<button id="sortName" disabled>Sort Name</button>' +
-      '<button id="sortDistance" disabled>Sort Distance</button>' +
-      '<select id="filter" size="1" disabled>' +
-      '<option value="all" selected>All</option>' +
-      '<option value="brewpub">Brewpubs</option>' +
-      '<option value="contract">Contract</option>' +
-      '<option value="micro">Micro</option>' +
-      '<option value="regional">Regional</option>' +
-      "</select>" +
-      "</div>";
-
-    hamburger = document.getElementById("hamburger");
-    menu = document.getElementById("menu");
-
-    menu.addEventListener("click", () => {
-      if (menu.innerText === "menu") {
-        hamburger.style.display = "block";
-        main.className = "menu-on";
-        menu.innerText = "menu_open";
-      } else {
-        hamburger.style.display = "none";
-        main.className = "menu-off";
-        menu.innerText = "menu";
-      }
-    });
-
-    main.className = "menu-on";
-
-    if (search.disabled) {
-      hamburger.style.display = "none";
-      main.className = "menu-off";
-      menu.innerText = "menu";
-    }
-  }
-
-  favorites = document.getElementById("favorites");
-  filter = document.getElementById("filter");
-  search = document.getElementById("search");
-  sortDistance = document.getElementById("sortDistance");
-  sortName = document.getElementById("sortName");
-  theme = document.getElementById("theme");
-
-  addListeners();
-
-  if (!searchState) {
-    search.disabled = true;
-    search.style.animationPlayState = "paused";
-    search.style.cursor = "not-allowed";
-    search.style.opacity = 0.25;
-
-    if (!firstRender) toggleButtons();
-  }
 }
