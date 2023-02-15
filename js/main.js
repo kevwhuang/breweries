@@ -203,6 +203,7 @@ function cleanup() {
         e.heart = false;
         e.hidden = false;
         e.postal = e.postal_code.slice(0, 5);
+        e.street = e.street.trim();
         e.type = e.brewery_type;
 
         if (!e.phone) e.phone = '';
