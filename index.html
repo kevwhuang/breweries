@@ -16,12 +16,15 @@
 
     <link rel="icon" type="image/x-icon" href="https://www.openbrewerydb.org/favicon.png">
     <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/utils.css">
     <link rel="stylesheet" href="css/root.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1">
 
     <script src="js/main.js" defer></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/geolocation.js" defer></script>
 
 </head>
 
@@ -57,8 +60,18 @@
     </header>
 
     <main>
-
-        <div id="gps"></div>
+        <div id="gps">
+            <div id="loading" class="hidden gps-loading">Loading... please wait...</div>
+            <div class="hidden" id="gps-connection-error">Error... please check your connection...</div>
+            <div class="hidden" id="gps-permission-error">Error... please enable location services...</div>
+            <div class="hidden" id="gps-unsupported-error">Your browser does not support geolocation...</div>
+            <div class="hidden" id="gps-unknown-error">An unknown error occurred when trying to access your location...
+            </div>
+            <div class="hidden" id="gps-result">
+                <p>Latitude: <span id="lat-result"></span></p>
+                <p>Longitude: <span id="lon-result"></span></p>
+            </div>
+        </div>
         <div id="breweries"></div>
 
     </main>

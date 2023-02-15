@@ -276,10 +276,6 @@ select:focus {
     width: 30vw;
   }
 
-  span {
-    display: none;
-  }
-
   main #gps {
     margin-top: 6pc;
     padding: 1pc;

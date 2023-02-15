@@ -5,6 +5,7 @@
     Variable Declarations
 \* -------------------------------------------------------------------------- */
 
+let BREWERIES_API = "https://api.openbrewerydb.org/breweries";
 let favorites = document.getElementById("favorites");
 let filter = document.getElementById("filter");
 let hamburger = document.getElementById("hamburger");
@@ -21,8 +22,6 @@ let sortDistanceOrder = true;
 let sortNameOrder = false;
 
 let hearts = [];
-let lat;
-let lon;
 let master = [];
 let temp = [];
 let themeType = 0;
@@ -31,58 +30,53 @@ let themeType = 0;
     Geolocation API
 \* -------------------------------------------------------------------------- */
 
-async function geolocation(num = 50) {
-  const g = navigator.geolocation;
-  const gps = document.getElementById("gps");
+// Interface with the wrapper in geolocation.js and surface errors to the DOM
+async function manageGeolocation() {
+  show(document.getElementById("loading"));
+  try {
+    if (await locator.canGeolocate()) {
+      const [lat, lon] = await locator.getCoords();
 
-  gps.innerHTML = '<div id="loading">Loading... please wait...</div>';
-
-  await new Promise((res) => {
-    function writePos(pos) {
-      lat = pos.coords.latitude.toFixed(5);
-      lon = pos.coords.longitude.toFixed(5);
-
-      if (lat[0] !== "-") lat = `+${lat}`;
-      if (lon[0] !== "-") lon = `+${lon}`;
-
-      gps.innerHTML = `<p>Latitude: &nbsp;${lat}</p>`;
-      gps.innerHTML += `<p>Longitude: ${lon}</p>`;
-
-      res();
+      show(document.getElementById("gps-result"));
+      document.getElementById("lat-result").textContent = lat;
+      document.getElementById("lon-result").textContent = lon;
+      return [lat, lon];
     }
+  } catch (E) {
+    // Catch error that occured when geolocating, and use it to toggle correct error message in DOM
 
-    function errorPos(err) {
-      if (!navigator.onLine)
-        gps.innerHTML = "Error... please check your connection...";
-      else if (err.PERMISSION_DENIED) {
-        gps.innerHTML = "Error... please enable location services...";
-      }
-    }
+    // If error is one we support - get handle for that.  Else get handle on the fallback
+    const errorElement = document.getElementById(E.message)
+      ? document.getElementById(E.message)
+      : document.getElementById(locator.errorCodes.UNKNOWN);
 
-    if (g)
-      g.getCurrentPosition((pos) => {
-        gps.innerHTML = `${pos.coords.latitude} / ${pos.coords.longitude}`;
-        console.info(gps.innerHTML);
-      });
-    else gps.innerHTML = "Your browser does not support geolocation...";
+    // Show it
+    show(errorElement);
+  } finally {
+    // regardless of error or success, hide loading
+    hide(document.getElementById("loading"));
+  }
+}
 
-    if (g) g.watchPosition(writePos, errorPos);
-    else gps.innerHTML = "Your browser does not support geolocation...";
+/**
+ * Queries the breweries API.  Lacks any robust error handling but will tackle that later
+ * @param {String} lat
+ * @param {String} lon
+ * @param {Number} num pages of results to retrieve from API
+ */
+async function queryAPI(lat, lon, num = 50) {
+  const params = new URLSearchParams({
+    by_dist: `${lat},${lon}`,
+    per_page: num,
   });
 
-  await fetch(
-    `https://api.openbrewerydb.org/breweries?by_dist=${lat},${lon}&per_page=${num}`
-  )
+  await fetch(`${BREWERIES_API}?${params.toString()}`)
     .then((res) => res.json())
     .then((data) => {
       master = data;
     })
-    .then(() => render())
-    .catch((err) => {
-      gps.innerHTML = "Error... do not resize the window during fetch...";
-      console.info(err);
-    });
-
+    .then(() => addDistance(lat, lon)) // pass lat, lon here
+    .then(render);
   heartSystem();
   toggleButtons();
 }
@@ -98,8 +92,6 @@ function render() {
 
   if (firstRender) {
     firstRender = false;
-
-    addDistance();
     cleanup();
   }
 
@@ -182,7 +174,7 @@ function heartSystem() {
     Helper Functions
 \* -------------------------------------------------------------------------- */
 
-function addDistance() {
+function addDistance(lat, lon) {
   master.forEach((e) => {
     const pr = Math.PI / 180;
     const φ1 = lat * pr;
@@ -313,7 +305,13 @@ function searchEL(e) {
   e.target.style.cursor = "not-allowed";
   e.target.style.opacity = 0.25;
 
-  geolocation();
+  toggleDropdown();
+  manageGeolocation().then((result) => {
+    if (result) {
+      let [lat, lon] = result;
+      if (lat && lon) queryAPI(lat, lon);
+    }
+  });
 }
 
 function sortDistanceEL() {
