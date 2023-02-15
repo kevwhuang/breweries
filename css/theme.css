@@ -1,0 +1,35 @@
+/* Light theme */
+body.light {
+  background: #eee;
+  color: black;
+}
+
+.light header,
+.light footer {
+  background: white;
+}
+
+.light a:visited,
+.light a,
+.light button,
+.light select {
+  color: black;
+}
+
+/* Dark theme */
+body.dark {
+  background: #222;
+  color: white;
+}
+
+.dark header,
+.dark footer {
+  background: #152238;
+}
+
+.dark a:visited,
+.dark a,
+.dark button,
+.dark select {
+  color: white;
+}

@@ -13,7 +13,6 @@ let menu = document.getElementById("menu");
 let search = document.getElementById("search");
 let sortDistance = document.getElementById("sortDistance");
 let sortName = document.getElementById("sortName");
-let theme = document.getElementById("theme");
 
 let firstRender = true;
 let heartsDisplay = false;
@@ -24,7 +23,6 @@ let sortNameOrder = false;
 let hearts = [];
 let master = [];
 let temp = [];
-let themeType = 0;
 
 /* -------------------------------------------------------------------------- *\
     Geolocation API
@@ -190,16 +188,6 @@ function addDistance(lat, lon) {
   });
 }
 
-function changeTextColor(current) {
-  const css = document.styleSheets[2].cssRules;
-
-  for (let i = 0; i < css.length; i++) {
-    if (css[i].selectorText === "a:visited") css[i].style.color = current;
-    if (css[i].selectorText === "a") css[i].style.color = current;
-    if (css[i].selectorText === "button, select") css[i].style.color = current;
-  }
-}
-
 function cleanup() {
   master.forEach((e) => {
     e.heart = false;
@@ -340,24 +328,15 @@ function sortNameEL() {
 }
 
 function themeEL() {
-  if (!themeType) {
-    themeType = 1;
-    document.body.style.background = "#eee";
-    document.body.style.color = "black";
-    document.querySelector("header").style.background = "#222";
-    document.querySelector("footer").style.background = "#222";
+  const body = document.body;
 
-    changeTextColor("black");
+  if (body.classList.contains("light")) {
+    body.classList.remove("light");
+    body.classList.add("dark");
   } else {
-    themeType = 0;
-    document.body.style.background = "#222";
-    document.body.style.color = "white";
-    document.querySelector("header").style.background = "#152238";
-    document.querySelector("footer").style.background = "#152238";
-
-    changeTextColor("white");
+    body.classList.add("light");
+    body.classList.remove("dark");
   }
-  toggleDropdown();
 }
 
 /* -------------------------------------------------------------------------- *\
